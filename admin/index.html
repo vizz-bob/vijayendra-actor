@@ -8,5 +8,75 @@
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Big-photo preview pane: shows every image in the entry at a large,
+    // easy-to-inspect size, grouped by section and labeled with its filename.
+    // (The small thumbnails on the left are still what you use to Remove/Replace —
+    // this pane is just for looking closely before you decide.)
+    var h = window.h;
+    var createClass = window.createClass;
+
+    function filename(path) {
+      if (!path) return '';
+      var parts = String(path).split('/');
+      return parts[parts.length - 1];
+    }
+
+    var BigPreview = createClass({
+      renderGroup: function(title, paths, getAsset) {
+        var self = this;
+        if (!paths || !paths.length) return null;
+        var list = Array.isArray(paths) ? paths : [paths];
+        return h('div', { key: title, style: { marginBottom: '36px' } },
+          h('h3', { style: { fontFamily: 'sans-serif', borderBottom: '1px solid #333', paddingBottom: '8px' } }, title + ' (' + list.length + ')'),
+          h('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '14px' } },
+            list.map(function(p, i) {
+              if (!p) return null;
+              var url = getAsset(p).toString();
+              return h('div', { key: i, style: { width: '220px' } },
+                h('img', {
+                  src: url,
+                  style: {
+                    width: '220px', height: '220px', objectFit: 'cover',
+                    borderRadius: '6px', border: '1px solid #444', display: 'block'
+                  }
+                }),
+                h('div', {
+                  style: { fontFamily: 'monospace', fontSize: '11px', color: '#aaa', marginTop: '4px', wordBreak: 'break-all' }
+                }, filename(p))
+              );
+            })
+          )
+        );
+      },
+      render: function() {
+        var entry = this.props.entry;
+        var getAsset = this.props.getAsset;
+        var data = entry.get('data');
+        if (!data) return h('div', {}, 'Loading preview…');
+        var toJS = function(v) { return v && v.toJS ? v.toJS() : v; };
+
+        var heroImages = toJS(data.getIn(['hero', 'images'])) || [];
+        var portrait = data.getIn(['about', 'portrait']);
+        var range = toJS(data.get('range')) || [];
+        var rangeImages = range.map(function(r) { return r.image; });
+        var gallery = toJS(data.get('gallery')) || {};
+
+        return h('div', { style: { padding: '20px', background: '#111', color: '#eee', minHeight: '100vh' } },
+          h('h2', { style: { fontFamily: 'sans-serif' } }, 'Photo Check — full size'),
+          h('p', { style: { fontFamily: 'sans-serif', color: '#999', fontSize: '13px', marginBottom: '30px' } },
+            'Use this to inspect every photo up close. To remove or replace one, use the small thumbnail\'s buttons in the form on the left — this pane is just for looking.'),
+          this.renderGroup('Hero (rotating background)', heroImages, getAsset),
+          this.renderGroup('About Portrait', portrait ? [portrait] : [], getAsset),
+          this.renderGroup('Range Cards', rangeImages, getAsset),
+          this.renderGroup('Gallery — Suit & Tie', gallery.suit, getAsset),
+          this.renderGroup('Gallery — Traditional', gallery.traditional, getAsset),
+          this.renderGroup('Gallery — Smart Casual', gallery.casual, getAsset)
+        );
+      }
+    });
+
+    CMS.registerPreviewTemplate('main', BigPreview);
+  </script>
 </body>
 </html>
