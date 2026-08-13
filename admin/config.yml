@@ -5,7 +5,7 @@ backend:
   base_url: https://vijayendra-cms-auth.vizz-bob.workers.dev
 
 media_folder: "assets/img/uploads"
-public_folder: "assets/img/uploads"
+public_folder: "/vijayendra-actor/assets/img/uploads"
 
 site_url: https://vizz-bob.github.io/vijayendra-actor/
 display_url: https://vizz-bob.github.io/vijayendra-actor/
