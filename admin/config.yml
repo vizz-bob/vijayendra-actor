@@ -2,9 +2,7 @@ backend:
   name: github
   repo: vizz-bob/vijayendra-actor
   branch: main
-  # ⚠️ REQUIRED: replace with your deployed OAuth worker URL (see OAUTH_SETUP.md), e.g.
-  # base_url: https://vijayendra-cms-auth.YOUR-SUBDOMAIN.workers.dev
-  base_url: https://REPLACE-ME.workers.dev
+  base_url: https://vijayendra-cms-auth.vizz-bob.workers.dev
 
 media_folder: "assets/img/uploads"
 public_folder: "assets/img/uploads"
