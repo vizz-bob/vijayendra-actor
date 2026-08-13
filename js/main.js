@@ -1,59 +1,154 @@
-// ---------- data: gallery images ----------
-const GALLERY = {
-  suit: ["2A6A3871","2A6A3872","2A6A3873","2A6A3876","2A6A3877","2A6A3879","2A6A3880","2A6A3882","2A6A3883","2A6A3885","2A6A3887","2A6A3888","2A6A3907","2A6A3916"],
-  traditional: ["2A6A4029","2A6A4033","2A6A4035","2A6A4036","2A6A4038","2A6A4039","2A6A4042","2A6A4044","2A6A4046","2A6A4049"],
-  casual: ["2A6A4053","2A6A4054","2A6A4057","2A6A4058","2A6A4061","2A6A4065","2A6A4067","2A6A4070","2A6A4077","2A6A4085"],
-};
+// ---------- load content.json and render the whole page ----------
+async function loadContent() {
+  const res = await fetch('content.json', { cache: 'no-store' });
+  return res.json();
+}
 
-const LABELS = { suit: "Suit & Tie", traditional: "Traditional", casual: "Smart Casual" };
+function el(tag, cls, html) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html !== undefined) e.innerHTML = html;
+  return e;
+}
 
-// ---------- build gallery grid ----------
-const grid = document.getElementById('galleryGrid');
-const items = [];
-Object.entries(GALLERY).forEach(([cat, names]) => {
-  names.forEach(name => {
-    const full = `assets/img/gallery/${cat}/${name}.jpg`;
-    const thumb = `assets/img/gallery/${cat}/${name}_thumb.jpg`;
-    items.push({ cat, full, thumb, name });
+function render(data) {
+  // ---- site basics ----
+  document.title = `${data.site.name} — Actor`;
+  document.getElementById('logo').textContent = data.site.name;
+  document.getElementById('footerLogo').textContent = data.site.name;
+  if (data.site.accent) document.documentElement.style.setProperty('--accent', data.site.accent);
+
+  // ---- hero ----
+  const heroBg = document.getElementById('heroBg');
+  heroBg.innerHTML = '';
+  data.hero.images.forEach((src, i) => {
+    const slide = el('div', 'hero-slide' + (i === 0 ? ' active' : ''));
+    slide.style.backgroundImage = `url('${src}')`;
+    heroBg.appendChild(slide);
   });
-});
+  document.getElementById('heroEyebrow').textContent = data.site.eyebrow;
+  document.getElementById('heroName').innerHTML = data.site.name.split(' ').join('<br>');
+  document.getElementById('heroTag').textContent = data.site.tagline;
 
-items.forEach((item, i) => {
-  const el = document.createElement('div');
-  el.className = 'gallery-item';
-  el.dataset.cat = item.cat;
-  el.dataset.index = i;
-  el.innerHTML = `<img src="${item.thumb}" alt="${LABELS[item.cat]} — ${item.name}" loading="lazy">`;
-  el.addEventListener('click', () => openLightbox(i));
-  grid.appendChild(el);
-});
+  // ---- about ----
+  document.getElementById('aboutPortrait').src = data.about.portrait;
+  document.getElementById('aboutPortrait').alt = `${data.site.name} — portrait`;
+  document.getElementById('aboutHeading').innerHTML = data.about.heading;
+  document.getElementById('aboutBio').textContent = data.about.bio;
+  const bioNoteEl = document.getElementById('aboutBioNote');
+  if (data.about.bioNote) { bioNoteEl.innerHTML = `<em>${data.about.bioNote}</em>`; bioNoteEl.style.display = ''; }
+  else { bioNoteEl.style.display = 'none'; }
+  const statRow = document.getElementById('statRow');
+  statRow.innerHTML = '';
+  data.about.stats.forEach(s => {
+    statRow.appendChild(el('div', null, `<span>${s.value}</span><small>${s.label}</small>`));
+  });
 
-// ---------- filters ----------
-const filterBtns = document.querySelectorAll('.filter-btn');
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const f = btn.dataset.filter;
-    document.querySelectorAll('.gallery-item').forEach(el => {
-      el.classList.toggle('hide', f !== 'all' && el.dataset.cat !== f);
+  // ---- range ----
+  const rangeGrid = document.getElementById('rangeGrid');
+  rangeGrid.innerHTML = '';
+  data.range.forEach(r => {
+    rangeGrid.appendChild(el('div', 'range-card',
+      `<img src="${r.image}" alt="${r.title}" loading="lazy">
+       <h3>${r.title}</h3><p>${r.desc}</p>`));
+  });
+
+  // ---- gallery filters ----
+  const filters = document.getElementById('filters');
+  filters.innerHTML = '';
+  const allBtn = el('button', 'filter-btn active', 'All');
+  allBtn.dataset.filter = 'all';
+  filters.appendChild(allBtn);
+  data.galleryCategories.forEach(c => {
+    const btn = el('button', 'filter-btn', c.label);
+    btn.dataset.filter = c.key;
+    filters.appendChild(btn);
+  });
+
+  // ---- gallery grid ----
+  const grid = document.getElementById('galleryGrid');
+  grid.innerHTML = '';
+  const items = [];
+  data.galleryCategories.forEach(c => {
+    (data.gallery[c.key] || []).forEach(src => {
+      const thumb = src.replace(/(\.[a-zA-Z0-9]+)$/, '_thumb$1');
+      items.push({ cat: c.key, full: src, thumb, label: c.label });
     });
   });
-});
+  items.forEach((item, i) => {
+    const card = el('div', 'gallery-item');
+    card.dataset.cat = item.cat;
+    const img = el('img');
+    img.loading = 'lazy';
+    img.alt = `${item.label} — ${data.site.name}`;
+    img.src = item.thumb;
+    img.onerror = () => { img.onerror = null; img.src = item.full; };
+    card.appendChild(img);
+    card.addEventListener('click', () => openLightbox(i));
+    grid.appendChild(card);
+  });
+
+  // ---- reel ----
+  document.querySelector('#reel h2').textContent = data.reel.heading;
+  document.querySelector('.reel-placeholder p:first-child').textContent = data.reel.status;
+  document.querySelector('.reel-placeholder p.muted').textContent = data.reel.note;
+
+  // ---- resume ----
+  fillList('vitalsList', data.resume.vitals);
+  fillList('skillsList', data.resume.skills);
+  const creditsList = document.getElementById('creditsList');
+  creditsList.innerHTML = '';
+  data.resume.credits.forEach(c => {
+    creditsList.appendChild(el('li', null, `<span>${c.title}</span><span>${c.meta}</span>`));
+  });
+  document.getElementById('resumeNote').textContent = data.resume.note;
+
+  // ---- contact ----
+  const emailLinks = document.querySelectorAll('.js-email');
+  emailLinks.forEach(a => { a.href = `mailto:${data.contact.email}`; a.textContent = data.contact.email; });
+  const igLink = document.getElementById('igLink');
+  const imdbLink = document.getElementById('imdbLink');
+  igLink.href = data.contact.instagram || '#';
+  imdbLink.href = data.contact.imdb || '#';
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  return items;
+}
+
+function fillList(id, rows) {
+  const listEl = document.getElementById(id);
+  listEl.innerHTML = '';
+  rows.forEach(r => listEl.appendChild(el('li', null, `<span>${r.label}</span><span>${r.value}</span>`)));
+}
+
+// ---------- filters ----------
+function setupFilters() {
+  document.getElementById('filters').addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.gallery-item').forEach(elm => {
+      elm.classList.toggle('hide', f !== 'all' && elm.dataset.cat !== f);
+    });
+  });
+}
 
 // ---------- lightbox ----------
+let GALLERY_ITEMS = [];
 const lightbox = document.getElementById('lightbox');
 const lbImage = document.getElementById('lbImage');
 let currentIndex = 0;
 
 function visibleIndices() {
   const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-  return items.map((it, i) => i).filter(i => activeFilter === 'all' || items[i].cat === activeFilter);
+  return GALLERY_ITEMS.map((it, i) => i).filter(i => activeFilter === 'all' || GALLERY_ITEMS[i].cat === activeFilter);
 }
-
 function openLightbox(index) {
   currentIndex = index;
-  lbImage.src = items[index].full;
+  lbImage.src = GALLERY_ITEMS[index].full;
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -67,7 +162,6 @@ function step(dir) {
   const next = (pos + dir + vis.length) % vis.length;
   openLightbox(vis[next]);
 }
-
 document.getElementById('lbClose').addEventListener('click', closeLightbox);
 document.getElementById('lbPrev').addEventListener('click', () => step(-1));
 document.getElementById('lbNext').addEventListener('click', () => step(1));
@@ -80,13 +174,16 @@ document.addEventListener('keydown', e => {
 });
 
 // ---------- hero Ken Burns crossfade ----------
-const slides = document.querySelectorAll('.hero-slide');
-let slideIndex = 0;
-setInterval(() => {
-  slides[slideIndex].classList.remove('active');
-  slideIndex = (slideIndex + 1) % slides.length;
-  slides[slideIndex].classList.add('active');
-}, 6000);
+function setupHeroCrossfade() {
+  setInterval(() => {
+    const slides = document.querySelectorAll('.hero-slide');
+    if (!slides.length) return;
+    let idx = [...slides].findIndex(s => s.classList.contains('active'));
+    slides[idx].classList.remove('active');
+    idx = (idx + 1) % slides.length;
+    slides[idx].classList.add('active');
+  }, 6000);
+}
 
 // ---------- header scroll state ----------
 const header = document.getElementById('siteHeader');
@@ -100,5 +197,11 @@ const nav = document.getElementById('nav');
 navToggle.addEventListener('click', () => nav.classList.toggle('open'));
 nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 
-// ---------- footer year ----------
-document.getElementById('year').textContent = new Date().getFullYear();
+// ---------- boot ----------
+loadContent().then(data => {
+  GALLERY_ITEMS = render(data);
+  setupFilters();
+  setupHeroCrossfade();
+}).catch(err => {
+  console.error('Failed to load content.json', err);
+});

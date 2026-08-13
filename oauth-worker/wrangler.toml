@@ -1,0 +1,7 @@
+name = "vijayendra-cms-auth"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Secrets (set these with `wrangler secret put`, never write them here):
+#   GITHUB_CLIENT_ID
+#   GITHUB_CLIENT_SECRET

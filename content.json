@@ -1,0 +1,80 @@
+{
+  "site": {
+    "name": "Vijayendra Singh",
+    "tagline": "Commanding presence. Quiet precision. Ready for the frame.",
+    "eyebrow": "Actor · Screen & Stage",
+    "accent": "#c19a5b"
+  },
+  "hero": {
+    "images": [
+      "assets/img/hero/2A6A3872.jpg",
+      "assets/img/hero/2A6A3877.jpg",
+      "assets/img/hero/2A6A3883.jpg",
+      "assets/img/hero/2A6A4067.jpg"
+    ]
+  },
+  "about": {
+    "portrait": "assets/img/portrait/2A6A4067.jpg",
+    "heading": "A seasoned presence,<br>built for the camera.",
+    "bio": "Vijayendra Singh is a 51-year-old actor based in India, bringing a lifetime of lived experience to every role — the gravity of a mature lead, the edge of a character part, and the polish a premium commercial campaign demands. Trained by years off-camera as much as on it, his range moves comfortably between dramatic intensity and warm, conversational ease.",
+    "bioNote": "[Editable — replace with your own bio: training, notable credits, languages, the story you want casting directors to read first.]",
+    "stats": [
+      { "value": "51", "label": "Years" },
+      { "value": "IN", "label": "Based in India" },
+      { "value": "3", "label": "Signature Looks" }
+    ]
+  },
+  "range": [
+    { "category": "suit", "title": "Suit & Tie", "desc": "Leading-man, boardroom, authority — the rust three-piece with quiet confidence.", "image": "assets/img/gallery/suit/2A6A3877_thumb.jpg" },
+    { "category": "traditional", "title": "Traditional", "desc": "Classic black kurta — warmth, heritage, and stage-ready presence.", "image": "assets/img/gallery/traditional/2A6A4038_thumb.jpg" },
+    { "category": "casual", "title": "Smart Casual", "desc": "Contemplative, grounded, real — the register closest to everyday truth.", "image": "assets/img/gallery/casual/2A6A4067_thumb.jpg" }
+  ],
+  "galleryCategories": [
+    { "key": "suit", "label": "Suit & Tie" },
+    { "key": "traditional", "label": "Traditional" },
+    { "key": "casual", "label": "Smart Casual" }
+  ],
+  "gallery": {
+    "suit": [
+      "assets/img/gallery/suit/2A6A3871.jpg","assets/img/gallery/suit/2A6A3872.jpg","assets/img/gallery/suit/2A6A3873.jpg","assets/img/gallery/suit/2A6A3876.jpg","assets/img/gallery/suit/2A6A3877.jpg","assets/img/gallery/suit/2A6A3879.jpg","assets/img/gallery/suit/2A6A3880.jpg","assets/img/gallery/suit/2A6A3882.jpg","assets/img/gallery/suit/2A6A3883.jpg","assets/img/gallery/suit/2A6A3885.jpg","assets/img/gallery/suit/2A6A3887.jpg","assets/img/gallery/suit/2A6A3888.jpg","assets/img/gallery/suit/2A6A3907.jpg","assets/img/gallery/suit/2A6A3916.jpg"
+    ],
+    "traditional": [
+      "assets/img/gallery/traditional/2A6A4029.jpg","assets/img/gallery/traditional/2A6A4033.jpg","assets/img/gallery/traditional/2A6A4035.jpg","assets/img/gallery/traditional/2A6A4036.jpg","assets/img/gallery/traditional/2A6A4038.jpg","assets/img/gallery/traditional/2A6A4039.jpg","assets/img/gallery/traditional/2A6A4042.jpg","assets/img/gallery/traditional/2A6A4044.jpg","assets/img/gallery/traditional/2A6A4046.jpg","assets/img/gallery/traditional/2A6A4049.jpg"
+    ],
+    "casual": [
+      "assets/img/gallery/casual/2A6A4053.jpg","assets/img/gallery/casual/2A6A4054.jpg","assets/img/gallery/casual/2A6A4057.jpg","assets/img/gallery/casual/2A6A4058.jpg","assets/img/gallery/casual/2A6A4061.jpg","assets/img/gallery/casual/2A6A4065.jpg","assets/img/gallery/casual/2A6A4067.jpg","assets/img/gallery/casual/2A6A4070.jpg","assets/img/gallery/casual/2A6A4077.jpg","assets/img/gallery/casual/2A6A4085.jpg"
+    ]
+  },
+  "reel": {
+    "heading": "Demo Reel",
+    "status": "Demo reel coming soon.",
+    "note": "[Add a YouTube/Vimeo embed or an mp4 file here once your reel is ready.]"
+  },
+  "resume": {
+    "vitals": [
+      { "label": "Age Range", "value": "45–55" },
+      { "label": "Height", "value": "5'7\"" },
+      { "label": "Weight", "value": "74 kg" },
+      { "label": "Build", "value": "Fit" },
+      { "label": "Hair", "value": "Black" },
+      { "label": "Eyes", "value": "Black" },
+      { "label": "Languages", "value": "Hindi, English" }
+    ],
+    "skills": [
+      { "label": "Special Skills", "value": "[Add — driving, sports, accents…]" },
+      { "label": "Training", "value": "[Add acting training/workshops]" },
+      { "label": "Union / Guild", "value": "[Add if applicable]" }
+    ],
+    "credits": [
+      { "title": "[Project Title]", "meta": "[Role · Year]" },
+      { "title": "[Project Title]", "meta": "[Role · Year]" },
+      { "title": "[Project Title]", "meta": "[Role · Year]" }
+    ],
+    "note": "[This section is a placeholder — replace with your real measurements, training, and credits.]"
+  },
+  "contact": {
+    "email": "vizz.bob@gmail.com",
+    "instagram": "",
+    "imdb": ""
+  }
+}

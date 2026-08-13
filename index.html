@@ -17,7 +17,7 @@
 
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
-    <a href="#top" class="logo">Vijayendra Singh</a>
+    <a href="#top" class="logo" id="logo">Vijayendra Singh</a>
     <nav class="nav" id="nav">
       <a href="#about">About</a>
       <a href="#range">Range</a>
@@ -33,17 +33,12 @@
 </header>
 
 <section class="hero" id="top">
-  <div class="hero-bg">
-    <div class="hero-slide active" style="background-image:url('assets/img/hero/2A6A3872.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('assets/img/hero/2A6A3877.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('assets/img/hero/2A6A3883.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('assets/img/hero/2A6A4067.jpg')"></div>
-  </div>
+  <div class="hero-bg" id="heroBg"></div>
   <div class="hero-scrim"></div>
   <div class="hero-content">
-    <p class="eyebrow">Actor · Screen &amp; Stage</p>
-    <h1>Vijayendra<br>Singh</h1>
-    <p class="hero-tag">Commanding presence. Quiet precision. Ready for the frame.</p>
+    <p class="eyebrow" id="heroEyebrow"></p>
+    <h1 id="heroName"></h1>
+    <p class="hero-tag" id="heroTag"></p>
     <div class="hero-actions">
       <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
       <a href="#contact" class="btn btn-outline">Get in Touch</a>
@@ -57,27 +52,14 @@
 <section class="section about" id="about">
   <div class="container about-grid">
     <div class="about-media">
-      <img src="assets/img/portrait/2A6A4067.jpg" alt="Vijayendra Singh — portrait" loading="lazy">
+      <img id="aboutPortrait" src="" alt="" loading="lazy">
     </div>
     <div class="about-copy">
       <p class="kicker">About</p>
-      <h2>A seasoned presence,<br>built for the camera.</h2>
-      <p>
-        Vijayendra Singh is a 51-year-old actor based in India, bringing a lifetime of lived
-        experience to every role — the gravity of a mature lead, the edge of a character part,
-        and the polish a premium commercial campaign demands. Trained by years off-camera as
-        much as on it, his range moves comfortably between dramatic intensity and warm,
-        conversational ease.
-      </p>
-      <p class="muted">
-        <em>[Editable — replace with your own bio: training, notable credits, languages,
-        the story you want casting directors to read first.]</em>
-      </p>
-      <div class="stat-row">
-        <div><span>51</span><small>Years</small></div>
-        <div><span>IN</span><small>Based in India</small></div>
-        <div><span>3</span><small>Signature Looks</small></div>
-      </div>
+      <h2 id="aboutHeading"></h2>
+      <p id="aboutBio"></p>
+      <p class="muted small" id="aboutBioNote"></p>
+      <div class="stat-row" id="statRow"></div>
     </div>
   </div>
 </section>
@@ -86,23 +68,7 @@
   <div class="container">
     <p class="kicker center">Range</p>
     <h2 class="center">Three Looks, One Actor</h2>
-    <div class="range-grid">
-      <div class="range-card">
-        <img src="assets/img/gallery/suit/2A6A3877_thumb.jpg" alt="Suit &amp; tie look" loading="lazy">
-        <h3>Suit &amp; Tie</h3>
-        <p>Leading-man, boardroom, authority — the rust three-piece with quiet confidence.</p>
-      </div>
-      <div class="range-card">
-        <img src="assets/img/gallery/traditional/2A6A4038_thumb.jpg" alt="Traditional look" loading="lazy">
-        <h3>Traditional</h3>
-        <p>Classic black kurta — warmth, heritage, and stage-ready presence.</p>
-      </div>
-      <div class="range-card">
-        <img src="assets/img/gallery/casual/2A6A4067_thumb.jpg" alt="Smart casual look" loading="lazy">
-        <h3>Smart Casual</h3>
-        <p>Contemplative, grounded, real — the register closest to everyday truth.</p>
-      </div>
-    </div>
+    <div class="range-grid" id="rangeGrid"></div>
   </div>
 </section>
 
@@ -110,12 +76,7 @@
   <div class="container">
     <p class="kicker center">Portfolio</p>
     <h2 class="center">Gallery</h2>
-    <div class="filters" id="filters">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="suit">Suit &amp; Tie</button>
-      <button class="filter-btn" data-filter="traditional">Traditional</button>
-      <button class="filter-btn" data-filter="casual">Smart Casual</button>
-    </div>
+    <div class="filters" id="filters"></div>
     <div class="gallery-grid" id="galleryGrid"></div>
   </div>
 </section>
@@ -126,8 +87,8 @@
     <h2 class="center">Demo Reel</h2>
     <div class="reel-frame">
       <div class="reel-placeholder">
-        <p>Demo reel coming soon.</p>
-        <p class="muted small">[Add a YouTube/Vimeo embed or an mp4 file here once your reel is ready.]</p>
+        <p></p>
+        <p class="muted small"></p>
       </div>
     </div>
   </div>
@@ -140,34 +101,18 @@
     <div class="resume-grid">
       <div class="resume-block">
         <h3>Vitals</h3>
-        <ul class="resume-list">
-          <li><span>Age Range</span><span>45–55</span></li>
-          <li><span>Height</span><span>5'7"</span></li>
-          <li><span>Weight</span><span>74 kg</span></li>
-          <li><span>Build</span><span>Fit</span></li>
-          <li><span>Hair</span><span>Black</span></li>
-          <li><span>Eyes</span><span>Black</span></li>
-          <li><span>Languages</span><span>Hindi, English</span></li>
-        </ul>
+        <ul class="resume-list" id="vitalsList"></ul>
       </div>
       <div class="resume-block">
         <h3>Skills</h3>
-        <ul class="resume-list">
-          <li><span>Special Skills</span><span>[Add — driving, sports, accents…]</span></li>
-          <li><span>Training</span><span>[Add acting training/workshops]</span></li>
-          <li><span>Union / Guild</span><span>[Add if applicable]</span></li>
-        </ul>
+        <ul class="resume-list" id="skillsList"></ul>
       </div>
       <div class="resume-block">
         <h3>Selected Credits</h3>
-        <ul class="resume-list credits">
-          <li><span>[Project Title]</span><span>[Role · Year]</span></li>
-          <li><span>[Project Title]</span><span>[Role · Year]</span></li>
-          <li><span>[Project Title]</span><span>[Role · Year]</span></li>
-        </ul>
+        <ul class="resume-list credits" id="creditsList"></ul>
       </div>
     </div>
-    <p class="center muted small resume-note">[This section is a placeholder — replace with your real measurements, training, and credits.]</p>
+    <p class="center muted small resume-note" id="resumeNote"></p>
   </div>
 </section>
 
@@ -176,18 +121,18 @@
 <footer class="site-footer" id="contact">
   <div class="container footer-inner">
     <div>
-      <p class="logo">Vijayendra Singh</p>
+      <p class="logo" id="footerLogo">Vijayendra Singh</p>
       <p class="muted small">Actor — Screen &amp; Stage · India</p>
     </div>
     <div class="footer-contact">
-      <a href="mailto:vizz.bob@gmail.com">vizz.bob@gmail.com</a>
+      <a href="#" class="js-email"></a>
       <div class="socials">
-        <a href="#" aria-label="Instagram">Instagram</a>
-        <a href="#" aria-label="IMDb">IMDb</a>
+        <a href="#" id="igLink" aria-label="Instagram">Instagram</a>
+        <a href="#" id="imdbLink" aria-label="IMDb">IMDb</a>
       </div>
     </div>
   </div>
-  <p class="copyright">© <span id="year"></span> Vijayendra Singh. All rights reserved.</p>
+  <p class="copyright">© <span id="year"></span> <span id="footerName">Vijayendra Singh</span>. All rights reserved.</p>
 </footer>
 
 <div class="lightbox" id="lightbox">

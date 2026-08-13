@@ -1,0 +1,127 @@
+backend:
+  name: github
+  repo: vizz-bob/vijayendra-actor
+  branch: main
+  # ⚠️ REQUIRED: replace with your deployed OAuth worker URL (see OAUTH_SETUP.md), e.g.
+  # base_url: https://vijayendra-cms-auth.YOUR-SUBDOMAIN.workers.dev
+  base_url: https://REPLACE-ME.workers.dev
+
+media_folder: "assets/img/uploads"
+public_folder: "assets/img/uploads"
+
+site_url: https://vizz-bob.github.io/vijayendra-actor/
+display_url: https://vizz-bob.github.io/vijayendra-actor/
+
+collections:
+  - name: "content"
+    label: "Site Content"
+    files:
+      - name: "main"
+        label: "Everything (Site, About, Gallery, Resume, Contact)"
+        file: "content.json"
+        fields:
+          - label: "Site"
+            name: "site"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+              - { label: "Eyebrow (small text above name)", name: "eyebrow", widget: "string" }
+              - { label: "Accent Color", name: "accent", widget: "color" }
+
+          - label: "Hero Background Photos (rotating)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - label: "Images"
+                name: "images"
+                widget: "list"
+                field: { label: "Image", name: "image", widget: "image" }
+
+          - label: "About Section"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Portrait Photo", name: "portrait", widget: "image" }
+              - { label: "Heading (HTML allowed, e.g. <br> for line break)", name: "heading", widget: "string" }
+              - { label: "Bio", name: "bio", widget: "text" }
+              - { label: "Bio Note / Placeholder Reminder (leave blank to hide)", name: "bioNote", widget: "string", required: false }
+              - label: "Stats"
+                name: "stats"
+                widget: "list"
+                fields:
+                  - { label: "Value", name: "value", widget: "string" }
+                  - { label: "Label", name: "label", widget: "string" }
+
+          - label: "Range (3 look cards)"
+            name: "range"
+            widget: "list"
+            fields:
+              - { label: "Category Key (suit / traditional / casual)", name: "category", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "desc", widget: "string" }
+              - { label: "Image", name: "image", widget: "image" }
+
+          - label: "Gallery Category Labels"
+            name: "galleryCategories"
+            widget: "list"
+            fields:
+              - { label: "Key (must match a category below)", name: "key", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+
+          - label: "Gallery Photos"
+            name: "gallery"
+            widget: "object"
+            fields:
+              - label: "Suit & Tie"
+                name: "suit"
+                widget: "list"
+                field: { label: "Image", name: "image", widget: "image" }
+              - label: "Traditional"
+                name: "traditional"
+                widget: "list"
+                field: { label: "Image", name: "image", widget: "image" }
+              - label: "Smart Casual"
+                name: "casual"
+                widget: "list"
+                field: { label: "Image", name: "image", widget: "image" }
+
+          - label: "Demo Reel"
+            name: "reel"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Status Line", name: "status", widget: "string" }
+              - { label: "Note", name: "note", widget: "string" }
+
+          - label: "Resume"
+            name: "resume"
+            widget: "object"
+            fields:
+              - label: "Vitals"
+                name: "vitals"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Value", name: "value", widget: "string" }
+              - label: "Skills"
+                name: "skills"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Value", name: "value", widget: "string" }
+              - label: "Credits"
+                name: "credits"
+                widget: "list"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Meta (role · year)", name: "meta", widget: "string" }
+              - { label: "Footer Note", name: "note", widget: "string" }
+
+          - label: "Contact"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
+              - { label: "IMDb URL", name: "imdb", widget: "string", required: false }
