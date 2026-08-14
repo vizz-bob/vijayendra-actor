@@ -33,15 +33,20 @@
 </header>
 
 <section class="hero" id="top">
-  <div class="hero-bg" id="heroBg"></div>
-  <div class="hero-scrim"></div>
-  <div class="hero-content">
-    <p class="eyebrow" id="heroEyebrow"></p>
-    <h1 id="heroName"></h1>
-    <p class="hero-tag" id="heroTag"></p>
-    <div class="hero-actions">
-      <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
-      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  <div class="hero-glow"></div>
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <p class="eyebrow" id="heroEyebrow"></p>
+      <h1 id="heroName"></h1>
+      <p class="hero-tag" id="heroTag"></p>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <div class="hero-media-frame" id="heroBg"></div>
+      <div class="hero-media-badge"><span class="badge-dot"></span>Available for Bookings</div>
     </div>
   </div>
   <div class="scroll-cue"><span></span>Scroll</div>
@@ -51,10 +56,10 @@
 
 <section class="section about" id="about">
   <div class="container about-grid">
-    <div class="about-media">
+    <div class="about-media reveal">
       <img id="aboutPortrait" src="" alt="" loading="lazy">
     </div>
-    <div class="about-copy">
+    <div class="about-copy reveal">
       <p class="kicker">About</p>
       <h2 id="aboutHeading"></h2>
       <p id="aboutBio"></p>
@@ -66,16 +71,16 @@
 
 <section class="section range" id="range">
   <div class="container">
-    <p class="kicker center">Range</p>
-    <h2 class="center">Three Looks, One Actor</h2>
+    <p class="kicker center reveal">Range</p>
+    <h2 class="center reveal">Three Looks, One Actor</h2>
     <div class="range-grid" id="rangeGrid"></div>
   </div>
 </section>
 
 <section class="section portfolio" id="portfolio">
   <div class="container">
-    <p class="kicker center">Portfolio</p>
-    <h2 class="center">Gallery</h2>
+    <p class="kicker center reveal">Portfolio</p>
+    <h2 class="center reveal">Gallery</h2>
     <div class="filters" id="filters"></div>
     <div class="gallery-grid" id="galleryGrid"></div>
   </div>
@@ -83,9 +88,9 @@
 
 <section class="section reel" id="reel">
   <div class="container reel-inner">
-    <p class="kicker center">Reel</p>
-    <h2 class="center">Demo Reel</h2>
-    <div class="reel-frame">
+    <p class="kicker center reveal">Reel</p>
+    <h2 class="center reveal">Demo Reel</h2>
+    <div class="reel-frame reveal">
       <div class="reel-placeholder">
         <p></p>
         <p class="muted small"></p>
@@ -96,18 +101,18 @@
 
 <section class="section resume" id="resume">
   <div class="container">
-    <p class="kicker center">Resume</p>
-    <h2 class="center">Stats &amp; Credits</h2>
+    <p class="kicker center reveal">Resume</p>
+    <h2 class="center reveal">Stats &amp; Credits</h2>
     <div class="resume-grid">
-      <div class="resume-block">
+      <div class="resume-block reveal">
         <h3>Vitals</h3>
         <ul class="resume-list" id="vitalsList"></ul>
       </div>
-      <div class="resume-block">
+      <div class="resume-block reveal">
         <h3>Skills</h3>
         <ul class="resume-list" id="skillsList"></ul>
       </div>
-      <div class="resume-block">
+      <div class="resume-block reveal">
         <h3>Selected Credits</h3>
         <ul class="resume-list credits" id="creditsList"></ul>
       </div>

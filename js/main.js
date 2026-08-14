@@ -48,8 +48,8 @@ function render(data) {
   const rangeGrid = document.getElementById('rangeGrid');
   rangeGrid.innerHTML = '';
   data.range.forEach(r => {
-    rangeGrid.appendChild(el('div', 'range-card',
-      `<img src="${r.image}" alt="${r.title}" loading="lazy">
+    rangeGrid.appendChild(el('div', 'range-card reveal',
+      `<div class="range-card-media"><img src="${r.image}" alt="${r.title}" loading="lazy"></div>
        <h3>${r.title}</h3><p>${r.desc}</p>`));
   });
 
@@ -76,7 +76,7 @@ function render(data) {
     });
   });
   items.forEach((item, i) => {
-    const card = el('div', 'gallery-item');
+    const card = el('div', 'gallery-item reveal');
     card.dataset.cat = item.cat;
     const img = el('img');
     img.loading = 'lazy';
@@ -182,7 +182,25 @@ function setupHeroCrossfade() {
     slides[idx].classList.remove('active');
     idx = (idx + 1) % slides.length;
     slides[idx].classList.add('active');
-  }, 6000);
+  }, 5000);
+}
+
+// ---------- scroll reveal ----------
+function setupReveal() {
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(elm => elm.classList.add('in'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  els.forEach(elm => io.observe(elm));
 }
 
 // ---------- header scroll state ----------
@@ -202,6 +220,7 @@ loadContent().then(data => {
   GALLERY_ITEMS = render(data);
   setupFilters();
   setupHeroCrossfade();
+  setupReveal();
 }).catch(err => {
   console.error('Failed to load content.json', err);
 });
