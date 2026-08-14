@@ -121,5 +121,6 @@ collections:
             widget: "object"
             fields:
               - { label: "Email", name: "email", widget: "string" }
+              - { label: "WhatsApp Number (country code + number, digits only, e.g. 919876543210)", name: "whatsapp", widget: "string", required: false }
               - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
               - { label: "IMDb URL", name: "imdb", widget: "string", required: false }

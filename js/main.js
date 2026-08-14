@@ -106,10 +106,23 @@ function render(data) {
   // ---- contact ----
   const emailLinks = document.querySelectorAll('.js-email');
   emailLinks.forEach(a => { a.href = `mailto:${data.contact.email}`; a.textContent = data.contact.email; });
+
+  const waDigits = (data.contact.whatsapp || '').replace(/[^\d]/g, '');
+  const waHref = waDigits ? `https://wa.me/${waDigits}` : '';
+  const whatsappLink = document.getElementById('whatsappLink');
+  const waFloat = document.getElementById('waFloat');
+  [whatsappLink, waFloat].forEach(node => {
+    if (!node) return;
+    if (waHref) { node.href = waHref; node.style.display = ''; }
+    else { node.style.display = 'none'; }
+  });
+
   const igLink = document.getElementById('igLink');
   const imdbLink = document.getElementById('imdbLink');
-  igLink.href = data.contact.instagram || '#';
-  imdbLink.href = data.contact.imdb || '#';
+  if (data.contact.instagram) { igLink.href = data.contact.instagram; igLink.style.display = ''; }
+  else { igLink.style.display = 'none'; }
+  if (data.contact.imdb) { imdbLink.href = data.contact.imdb; imdbLink.style.display = ''; }
+  else { imdbLink.style.display = 'none'; }
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
