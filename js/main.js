@@ -126,7 +126,24 @@ function render(data) {
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  setupContactForm(data.contact.email);
+
   return items;
+}
+
+// ---------- contact form (mailto handoff — no backend needed) ----------
+function setupContactForm(email) {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('cfName').value.trim();
+    const fromEmail = document.getElementById('cfEmail').value.trim();
+    const message = document.getElementById('cfMessage').value.trim();
+    const subject = encodeURIComponent(`New inquiry from ${name} — via portfolio site`);
+    const body = encodeURIComponent(`${message}\n\n—\n${name}\n${fromEmail}`);
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  });
 }
 
 function fillList(id, rows) {

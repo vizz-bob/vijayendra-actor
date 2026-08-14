@@ -127,9 +127,19 @@
   <div class="container">
     <p class="kicker center reveal">Contact</p>
     <h2 class="center reveal">Let's Work Together</h2>
-    <p class="center muted contact-lead reveal">For bookings, auditions, and collaborations — reach out directly.</p>
+    <p class="center muted contact-lead reveal">For bookings, auditions, and collaborations — send a message and I'll get back to you by email.</p>
+
+    <form class="contact-form reveal" id="contactForm">
+      <div class="form-row">
+        <input type="text" id="cfName" name="name" placeholder="Your Name" autocomplete="name" required>
+        <input type="email" id="cfEmail" name="email" placeholder="Your Email" autocomplete="email" required>
+      </div>
+      <textarea id="cfMessage" name="message" rows="5" placeholder="Tell me about the project, role, or opportunity…" required></textarea>
+      <button type="submit" class="btn btn-primary form-submit">Send Message</button>
+      <p class="form-note muted small">This opens your email app with the message ready to send to <a href="#" class="js-email"></a>.</p>
+    </form>
+
     <div class="contact-links reveal">
-      <a href="#" class="contact-link contact-link-primary js-email"></a>
       <a href="#" class="contact-link" id="whatsappLink" target="_blank" rel="noopener" style="display:none">WhatsApp</a>
       <a href="#" class="contact-link" id="igLink" target="_blank" rel="noopener" style="display:none">Instagram</a>
       <a href="#" class="contact-link" id="imdbLink" target="_blank" rel="noopener" style="display:none">IMDb</a>
