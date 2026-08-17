@@ -40,7 +40,10 @@ collections:
             name: "about"
             widget: "object"
             fields:
-              - { label: "Portrait Photo", name: "portrait", widget: "image" }
+              - label: "Portrait Photos (About Carousel)"
+                name: "portraits"
+                widget: "list"
+                field: { label: "Photo", name: "image", widget: "image" }
               - { label: "Heading (HTML allowed, e.g. <br> for line break)", name: "heading", widget: "string" }
               - { label: "Bio", name: "bio", widget: "text" }
               - { label: "Bio Note / Placeholder Reminder (leave blank to hide)", name: "bioNote", widget: "string", required: false }

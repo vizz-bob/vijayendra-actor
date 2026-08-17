@@ -31,8 +31,7 @@ function render(data) {
   document.getElementById('heroTag').textContent = data.site.tagline;
 
   // ---- about ----
-  document.getElementById('aboutPortrait').src = data.about.portrait;
-  document.getElementById('aboutPortrait').alt = `${data.site.name} — portrait`;
+  setupAboutCarousel(data);
   document.getElementById('aboutHeading').innerHTML = data.about.heading;
   document.getElementById('aboutBio').textContent = data.about.bio;
   const bioNoteEl = document.getElementById('aboutBioNote');
@@ -129,6 +128,50 @@ function render(data) {
   setupContactForm(data.contact.email);
 
   return items;
+}
+
+// ---------- about photo carousel ----------
+function setupAboutCarousel(data) {
+  const frame = document.getElementById('aboutMedia');
+  if (!frame) return;
+  const portraits = (data.about.portraits && data.about.portraits.length)
+    ? data.about.portraits
+    : (data.about.portrait ? [data.about.portrait] : []);
+  frame.innerHTML = '';
+  if (!portraits.length) return;
+
+  portraits.forEach((src, i) => {
+    const img = el('img', 'about-slide' + (i === 0 ? ' active' : ''));
+    img.src = src;
+    img.alt = `${data.site.name} — portrait`;
+    img.loading = 'lazy';
+    frame.appendChild(img);
+  });
+
+  if (portraits.length < 2) return;
+
+  const dots = el('div', 'about-dots');
+  portraits.forEach((_, i) => {
+    const dot = el('button', 'about-dot' + (i === 0 ? ' active' : ''));
+    dot.type = 'button';
+    dot.dataset.i = i;
+    dot.setAttribute('aria-label', `Show photo ${i + 1}`);
+    dots.appendChild(dot);
+  });
+  frame.appendChild(dots);
+
+  let idx = 0;
+  function show(i) {
+    idx = i;
+    frame.querySelectorAll('.about-slide').forEach((s, si) => s.classList.toggle('active', si === i));
+    frame.querySelectorAll('.about-dot').forEach((d, di) => d.classList.toggle('active', di === i));
+  }
+  dots.addEventListener('click', (e) => {
+    const dot = e.target.closest('.about-dot');
+    if (!dot) return;
+    show(parseInt(dot.dataset.i, 10));
+  });
+  setInterval(() => show((idx + 1) % portraits.length), 5000);
 }
 
 // ---------- contact form (mailto handoff — no backend needed) ----------
