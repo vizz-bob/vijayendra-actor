@@ -254,6 +254,7 @@ h2.center { text-align: center; }
 }
 .filter-btn:hover { color: var(--ink); border-color: var(--ink-dim); }
 .filter-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.gallery-groups { display: block; }
 .gallery-category { margin-bottom: 58px; }
 .gallery-category:last-child { margin-bottom: 0; }
 .gallery-category.hide { display: none; }
