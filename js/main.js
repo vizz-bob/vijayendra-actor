@@ -64,27 +64,39 @@ function render(data) {
     filters.appendChild(btn);
   });
 
-  // ---- gallery grid ----
+  // ---- gallery grid (grouped by category, with headings shown in the "All" view) ----
   const grid = document.getElementById('galleryGrid');
   grid.innerHTML = '';
   const items = [];
   data.galleryCategories.forEach(c => {
-    (data.gallery[c.key] || []).forEach(src => {
+    const catPhotos = data.gallery[c.key] || [];
+    const catItems = catPhotos.map(src => {
       const thumb = src.replace(/(\.[a-zA-Z0-9]+)$/, '_thumb$1');
-      items.push({ cat: c.key, full: src, thumb, label: c.label });
+      return { cat: c.key, full: src, thumb, label: c.label };
     });
-  });
-  items.forEach((item, i) => {
-    const card = el('div', 'gallery-item reveal');
-    card.dataset.cat = item.cat;
-    const img = el('img');
-    img.loading = 'lazy';
-    img.alt = `${item.label} — ${data.site.name}`;
-    img.src = item.thumb;
-    img.onerror = () => { img.onerror = null; img.src = item.full; };
-    card.appendChild(img);
-    card.addEventListener('click', () => openLightbox(i));
-    grid.appendChild(card);
+
+    const block = el('div', 'gallery-category');
+    block.dataset.cat = c.key;
+    block.appendChild(el('h3', 'gallery-cat-heading',
+      `${c.label} <span class="gallery-cat-count">${catItems.length}</span>`));
+    const catGrid = el('div', 'gallery-grid');
+    block.appendChild(catGrid);
+    grid.appendChild(block);
+
+    catItems.forEach(item => {
+      const globalIndex = items.length;
+      items.push(item);
+      const card = el('div', 'gallery-item reveal');
+      card.dataset.cat = item.cat;
+      const img = el('img');
+      img.loading = 'lazy';
+      img.alt = `${item.label} — ${data.site.name}`;
+      img.src = item.thumb;
+      img.onerror = () => { img.onerror = null; img.src = item.full; };
+      card.appendChild(img);
+      card.addEventListener('click', () => openLightbox(globalIndex));
+      catGrid.appendChild(card);
+    });
   });
 
   // ---- reel ----
@@ -203,8 +215,13 @@ function setupFilters() {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const f = btn.dataset.filter;
-    document.querySelectorAll('.gallery-item').forEach(elm => {
-      elm.classList.toggle('hide', f !== 'all' && elm.dataset.cat !== f);
+    const isAll = f === 'all';
+    document.querySelectorAll('.gallery-category').forEach(block => {
+      const match = isAll || block.dataset.cat === f;
+      block.classList.toggle('hide', !match);
+      // headings only make sense when browsing "All" — a single active
+      // category filter already says which one you're looking at
+      block.classList.toggle('single', !isAll);
     });
   });
 }

@@ -90,6 +90,10 @@
         "value": "3",
         "label": "Signature Looks"
       }
+    ],
+    "portraits": [
+      "/vijayendra-actor/assets/img/uploads/2a6a3890.jpg",
+      "/vijayendra-actor/assets/img/uploads/2a6a4067.jpg"
     ]
   },
   "galleryCategories": [
@@ -116,9 +120,7 @@
       "/vijayendra-actor/assets/img/gallery/suit/2A6A3879.jpg",
       "/vijayendra-actor/assets/img/gallery/suit/2A6A3880.jpg",
       "/vijayendra-actor/assets/img/uploads/2a6a3883.jpg",
-      "/vijayendra-actor/assets/img/uploads/2a6a3883.jpg",
       "/vijayendra-actor/assets/img/uploads/2a6a3885.jpg",
-      "/vijayendra-actor/assets/img/gallery/suit/2A6A3887.jpg",
       "/vijayendra-actor/assets/img/gallery/suit/2A6A3888.jpg",
       "/vijayendra-actor/assets/img/gallery/suit/2A6A3907.jpg",
       "/vijayendra-actor/assets/img/gallery/suit/2A6A3916.jpg"
@@ -133,10 +135,12 @@
       "/vijayendra-actor/assets/img/uploads/2a6a4070.jpg",
       "/vijayendra-actor/assets/img/uploads/2a6a4077.jpg",
       "/vijayendra-actor/assets/img/uploads/2a6a4058.jpg",
-      "/vijayendra-actor/assets/img/uploads/2a6a4085.jpg"
+      "/vijayendra-actor/assets/img/uploads/2a6a4085.jpg",
+      "/vijayendra-actor/assets/img/gallery/traditional/2A6A4048.jpg",
+      "/vijayendra-actor/assets/img/gallery/traditional/2A6A4051.jpg"
     ],
     "casual": [
-      "/vijayendra-actor/assets/img/gallery/casual/2A6A4053.jpg",
+      "/vijayendra-actor/assets/img/uploads/img_5691.png",
       "/vijayendra-actor/assets/img/gallery/casual/2A6A4054.jpg",
       "/vijayendra-actor/assets/img/gallery/casual/2A6A4057.jpg",
       "/vijayendra-actor/assets/img/gallery/casual/2A6A4058.jpg",
@@ -145,7 +149,9 @@
       "/vijayendra-actor/assets/img/gallery/casual/2A6A4067.jpg",
       "/vijayendra-actor/assets/img/gallery/casual/2A6A4070.jpg",
       "/vijayendra-actor/assets/img/gallery/casual/2A6A4077.jpg",
-      "/vijayendra-actor/assets/img/gallery/casual/2A6A4085.jpg"
+      "/vijayendra-actor/assets/img/gallery/casual/2A6A4085.jpg",
+      "/vijayendra-actor/assets/img/gallery/casual/2A6A4059.jpg",
+      "/vijayendra-actor/assets/img/gallery/casual/2A6A4072.jpg"
     ]
   },
   "reel": {
@@ -180,7 +186,7 @@
       "category": "casual",
       "title": "Smart Casual",
       "desc": "Contemplative, grounded, real — the register closest to everyday truth.",
-      "image": "/vijayendra-actor/assets/img/gallery/casual/2A6A4067_thumb.jpg"
+      "image": "/vijayendra-actor/assets/img/uploads/img_0504.jpg"
     }
   ]
 }

@@ -254,6 +254,19 @@ h2.center { text-align: center; }
 }
 .filter-btn:hover { color: var(--ink); border-color: var(--ink-dim); }
 .filter-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.gallery-category { margin-bottom: 58px; }
+.gallery-category:last-child { margin-bottom: 0; }
+.gallery-category.hide { display: none; }
+.gallery-cat-heading {
+  font-family: var(--serif); font-weight: 600; font-size: 1.5rem; color: var(--ink);
+  margin: 0 0 24px; display: flex; align-items: baseline; gap: 12px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--line);
+}
+.gallery-cat-count {
+  font-family: var(--sans); font-weight: 400; font-size: .78rem; color: var(--accent);
+  letter-spacing: .08em;
+}
+.gallery-category.single .gallery-cat-heading { display: none; }
 .gallery-grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
 }
