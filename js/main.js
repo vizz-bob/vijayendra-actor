@@ -173,17 +173,24 @@ function setupAboutCarousel(data) {
   frame.appendChild(dots);
 
   let idx = 0;
+  let timer = null;
   function show(i) {
     idx = i;
     frame.querySelectorAll('.about-slide').forEach((s, si) => s.classList.toggle('active', si === i));
     frame.querySelectorAll('.about-dot').forEach((d, di) => d.classList.toggle('active', di === i));
   }
+  function start() { stop(); timer = setInterval(() => show((idx + 1) % portraits.length), 3200); }
+  function stop() { if (timer) clearInterval(timer); timer = null; }
+
   dots.addEventListener('click', (e) => {
     const dot = e.target.closest('.about-dot');
     if (!dot) return;
     show(parseInt(dot.dataset.i, 10));
   });
-  setInterval(() => show((idx + 1) % portraits.length), 5000);
+  // pause the auto-rotate on click, resume once the cursor leaves the photo
+  frame.addEventListener('click', stop);
+  frame.addEventListener('mouseleave', start);
+  start();
 }
 
 // ---------- contact form (mailto handoff — no backend needed) ----------
@@ -265,14 +272,25 @@ document.addEventListener('keydown', e => {
 
 // ---------- hero Ken Burns crossfade ----------
 function setupHeroCrossfade() {
-  setInterval(() => {
+  const frame = document.getElementById('heroBg');
+  let timer = null;
+  function tick() {
     const slides = document.querySelectorAll('.hero-slide');
     if (!slides.length) return;
     let idx = [...slides].findIndex(s => s.classList.contains('active'));
     slides[idx].classList.remove('active');
     idx = (idx + 1) % slides.length;
     slides[idx].classList.add('active');
-  }, 5000);
+  }
+  function start() { stop(); timer = setInterval(tick, 3200); }
+  function stop() { if (timer) clearInterval(timer); timer = null; }
+
+  if (frame) {
+    // pause the auto-rotate on click, resume once the cursor leaves the photo
+    frame.addEventListener('click', stop);
+    frame.addEventListener('mouseleave', start);
+  }
+  start();
 }
 
 // ---------- scroll reveal ----------
